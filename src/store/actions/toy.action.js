@@ -2,6 +2,14 @@ import { toyService } from "../../services/toy.service.js"
 import { store } from "../store.js"
 import { SET_TOYS, REMOVE_TOY, ADD_TOY, UPDATE_TOY, SET_FILTERBY, SET_SORTBY } from "../reducers/toy.reducer.js"
 
+
+export const toyActions = {
+    loadToys,
+    removeToy,
+    saveToy,
+    setFilterBy,
+    setSortBy
+}
 export function loadToys(filterBy, sort) {
     return toyService.query(filterBy, sort)
         .then(toys => {

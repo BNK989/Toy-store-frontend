@@ -2,14 +2,25 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { useState } from 'react'
 
+import { ButtonGroup, Button } from '@mui/material'
+
 //import { MapHoverElm } from '../cmps/mapHoverElm.jsx'
 
 function Marker() {
-  return <div style={{ height: '1em', width: '1em', borderRadius: '50%', background: 'red' }}></div>
+  return (
+    <div
+      style={{
+        height: '1em',
+        width: '1em',
+        borderRadius: '50%',
+        background: 'red',
+      }}
+    ></div>
+  )
 }
 
-function Flag({text}){
-    return <div style={{fontSize: '2em'}}>{text}</div>
+function Flag({ text }) {
+  return <div style={{ fontSize: '2em' }}>{text}</div>
 }
 
 export function Locations() {
@@ -42,24 +53,29 @@ export function Locations() {
       },
     },
     {
-        city: 'Yehud',
-        id: 104,
-        position: {
-          lat: 32.03415,
-          lng: 34.88646,
-        },
+      city: 'Yehud',
+      id: 104,
+      position: {
+        lat: 32.03415,
+        lng: 34.88646,
       },
+    },
   ]
   const testCoords = {
     lat: 32.794,
     lng: 34.9896,
   }
-  const handleClick = ({lat, lng}) => {
-    setCenter({lat, lng})
+  const handleClick = ({ lat, lng }) => {
+    setCenter({ lat, lng })
   }
 
   return (
     <div>
+      <ButtonGroup variant="contained" aria-label="Basic button group">
+        <Button>One</Button>
+        <Button>Two</Button>
+        <Button>Three</Button>
+      </ButtonGroup>
       {branches.map((branch) => {
         return (
           <button key={branch.city} onClick={() => setCenter(branch.position)}>
@@ -68,15 +84,21 @@ export function Locations() {
         )
       })}
       <div style={{ height: '80dvh', width: '100%' }}>
-        <GoogleMapReact 
-        bootstrapURLKeys={{ key: 'AIzaSyDQlVeA8YSa4Bnjc8mGClgXvA5UUSXBFHw' }}
-        defaultCenter={{ lat: 32.794, lng: 34.9896 }} 
-        center={center} 
-        defaultZoom={zoom}
-        onClick={handleClick}
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyDQlVeA8YSa4Bnjc8mGClgXvA5UUSXBFHw' }}
+          defaultCenter={{ lat: 32.794, lng: 34.9896 }}
+          center={center}
+          defaultZoom={zoom}
+          onClick={handleClick}
         >
           {branches.map((branch) => {
-            return <Marker lat={branch.position.lat} lng={branch.position.lng} key={branch.id} />
+            return (
+              <Marker
+                lat={branch.position.lat}
+                lng={branch.position.lng}
+                key={branch.id}
+              />
+            )
           })}
           <Flag text="🚩" {...testCoords} />
         </GoogleMapReact>

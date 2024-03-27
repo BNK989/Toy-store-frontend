@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Routes } from 'react-router'
 import { ToyIndex } from './pages/ToyIndex'
 import { Locations } from './pages/Locations'
+import { Stats } from './pages/Stats'
 import { ToyEdit } from './pages/ToyEdit'
 import { ToyDetails } from './pages/ToyDetails'
 import { HomePage } from './pages/HomePage'
@@ -19,6 +20,7 @@ export function App() {
         <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
         <Route element={<ToyIndex />} path="/toy" />
         <Route element={<Locations />} path="/locations" />
+        <Route element={<Stats />} path="/stats" />
         <Route element={<HomePage />} path="/" />
       </Routes>
 

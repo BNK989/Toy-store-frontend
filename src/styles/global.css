@@ -50,3 +50,8 @@
 .btn-link:hover a {
     color: #1783ff;
 }
+
+.chart-container{
+    margin: auto;
+    width: 60%;
+}

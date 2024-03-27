@@ -8,7 +8,8 @@ export const toyService = {
     getEmptyToy,
     getDefaultFilterBy,
     getDefaultSort,
-    getLabels
+    getLabels,
+    getLabelsMap
 }
 
 const labels = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
@@ -19,6 +20,40 @@ function query(filterBy, sort) {
 
 function getLabels() {
     return [...labels]
+}
+
+
+function getLabelsMap() {
+    const emptyFilter = {
+        txt: '',
+        maxPrice: Infinity,
+        labels: [],
+        inStock: null
+    }
+    
+    const emptySort = {
+        by: 'name',
+        asc: true
+    }
+    return query(emptyFilter,emptySort).then(toys => {
+        // console.log('toys.length:', toys.length)
+        
+        const objMap = toys.reduce((acc, toy) => {
+            toy.labels.forEach((label) => {
+                if (!acc[label]) {
+                    acc[label] = 1
+                } else {
+                    acc[label] += 1
+                }
+            })
+            return acc
+        }, {})
+        
+        
+        // console.log('objMap:', objMap)
+        return objMap
+    })
+
 }
 
 function getById(toyId) {
@@ -57,7 +92,6 @@ function getDefaultFilterBy() {
 
 function getDefaultSort() {
     return {
-        // 
         by: 'name',
         asc: true
     }
